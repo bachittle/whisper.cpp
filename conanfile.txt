@@ -1,0 +1,6 @@
+[requires]
+sdl/2.26.5
+
+[generators]
+cmake_paths
+cmake_find_package
