@@ -357,6 +357,7 @@ int main(int argc, char ** argv) {
                         const int64_t t1 = whisper_full_get_segment_t1(ctx, i);
 
                         std::string output = "[" + to_timestamp(t0) + " --> " + to_timestamp(t1) + "]  " + text;
+                        va::process_text(output);
 
                         if (whisper_full_get_segment_speaker_turn_next(ctx, i)) {
                             output += " [SPEAKER_TURN]";
