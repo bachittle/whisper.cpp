@@ -25,7 +25,7 @@ namespace va {
                 printf("!!! running tts\n");
                 system("python examples/virtual_assistant/tts.py");
                 printf("!!! running ffplay\n");
-                system("ffplay build/bin/response.wav");
+                system("ffplay -autoexit build/bin/response.wav");
             }
         }
     }
