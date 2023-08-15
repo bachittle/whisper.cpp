@@ -14,4 +14,8 @@ response = openai.ChatCompletion.create(
     ]
 )
 
-print(f'response: {response}')
+msg_content = response['choices'][0]['message']['content']
+print(f'response: {msg_content}')
+
+with open("build/bin/response.txt", "w") as fp:
+    fp.write(msg_content)
