@@ -323,6 +323,7 @@ int main(int argc, char ** argv) {
 
             // print result;
             {
+                std::string full_output = "";
                 if (!use_vad) {
                     printf("\33[2K\r");
 
@@ -347,8 +348,6 @@ int main(int argc, char ** argv) {
                         printf("commiting string: %s\n", text);
                         fflush(stdout);
 
-                        va::process_text(text);
-
                         if (params.fname_out.length() > 0) {
                             fout << text;
                         }
@@ -357,7 +356,8 @@ int main(int argc, char ** argv) {
                         const int64_t t1 = whisper_full_get_segment_t1(ctx, i);
 
                         std::string output = "[" + to_timestamp(t0) + " --> " + to_timestamp(t1) + "]  " + text;
-                        va::process_text(output);
+                        // va::process_text(output);
+                        full_output += std::string(text) + "\n";
 
                         if (whisper_full_get_segment_speaker_turn_next(ctx, i)) {
                             output += " [SPEAKER_TURN]";
@@ -379,6 +379,7 @@ int main(int argc, char ** argv) {
                 }
 
                 if (use_vad){
+                    va::process_text(full_output);
                     printf("\n");
                     printf("### Transcription %d END\n", n_iter);
                 }

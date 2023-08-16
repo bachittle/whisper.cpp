@@ -14,6 +14,7 @@ namespace va {
         std::string search_str = "ivan";
         if (text.find(search_str) != std::string::npos) {
             printf("found ivan!\n");
+            system("ffplay -autoexit -nodisp /home/bachittle/Downloads/success.mp3 >/dev/null 2>&1");
             {
                 std::string tmp_file = "build/bin/query.txt";
                 std::ofstream ofs(tmp_file);
@@ -21,12 +22,16 @@ namespace va {
 
                 // system(("python examples/virtual_assistant/llm_chat.py " + tmp_file).c_str());
                 printf("!!! running llm chat\n");
-                system("python examples/virtual_assistant/llm_chat.py");
+                system("python examples/virtual_assistant/llm_chat.py build/bin/query.txt build/bin/response.txt");
                 printf("!!! running tts\n");
                 system("python examples/virtual_assistant/tts.py");
                 printf("!!! running ffplay\n");
-                system("ffplay -autoexit build/bin/response.wav");
+                system("ffplay -autoexit -nodisp build/bin/response.wav >/dev/null 2>&1");
             }
+        }
+        else {
+            printf("did not find ivan!\n");
+            system("ffplay -autoexit -nodisp /home/bachittle/Downloads/click.mp3 >/dev/null 2>&1");
         }
     }
 };
